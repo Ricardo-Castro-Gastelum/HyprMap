@@ -17,6 +17,10 @@
   <img src="assets/preview.png" alt="HyprMap preview" width="720">
 </p>
 
+<p align="center">
+  <img src="assets/preview-minimap.png" alt="HyprMap minimap close-up" width="442">
+</p>
+
 ---
 
 **HyprMap** draws a floating minimap in the bottom-right corner of your screen:
