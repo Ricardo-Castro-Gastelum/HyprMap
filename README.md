@@ -43,7 +43,7 @@ never steals focus and never blocks clicks.
 - **Live refresh** — window layout is re-polled every 700 ms while visible.
 - **Works two ways**:
   - **Standalone** — plain Hyprland + [Quickshell](https://github.com/outfoxxed/quickshell)
-    (no Omarchy needed). Ideal for Fedora and any distro using a vanilla
+    (no Omarchy needed). Ideal for Fedora, Arch and any distro using a vanilla
     Hyprland setup.
   - **Omarchy plugin** — native plugin for
     [Omarchy](https://omarchy.org) on Arch.
@@ -52,22 +52,47 @@ never steals focus and never blocks clicks.
 
 ## Installation
 
-### Option A — Standalone (Fedora + plain Hyprland) *recommended*
+### Option A — Standalone (any Hyprland: Fedora, Arch, …) *recommended*
+
+This build only requires Hyprland + Quickshell and works on any distro. Pick
+your distro below.
 
 **1. Install the dependencies**
+
+<details>
+<summary>Fedora</summary>
 
 ```bash
 # Hyprland (Fedora COPR)
 sudo dnf copr enable solopasha/hyprland
 sudo dnf install hyprland
 
-# Quickshell (Fedora COPR)
-sudo dnf copr enable codrin/quickshell
+# Quickshell (latest release from the official Quickshell COPR)
+sudo dnf copr enable errornointernet/quickshell
 sudo dnf install quickshell
+#   Alternative: Fedora's own repo (older snapshot) — sudo dnf install quickshell
 
 # An icon theme for the window logos (recommended)
 sudo dnf install papirus-icon-theme
 ```
+</details>
+
+<details>
+<summary>Arch</summary>
+
+```bash
+# Hyprland + Quickshell (official repos)
+sudo pacman -S hyprland quickshell
+#   Alternative: AUR for the dev branch — yay -S quickshell-git
+
+# An icon theme for the window logos (recommended)
+sudo pacman -S papirus-icon-theme
+```
+</details>
+
+> **Note for Fedora**: Quickshell links Qt's private APIs, so after a Qt
+> system update a previously installed Quickshell can crash. If that happens,
+> just reinstall it (`sudo dnf reinstall quickshell`).
 
 **2. Install HyprMap**
 
@@ -79,7 +104,7 @@ cd HyprMap
 
 **3. Autostart + keybinding**
 
-Add to `~/.config/hypr/hyprland.conf` and run `hyprctl reload`:
+Add to `~/.config/hypr/hyprland.conf`:
 
 ```ini
 # Autostart the minimap (shown by default)
@@ -89,11 +114,22 @@ exec-once = quickshell -c hyprmap
 bind = SUPER, M, exec, quickshell ipc -c hyprmap call hyprmap toggle
 ```
 
+Then run:
+
+```bash
+hyprctl reload
+hyprctl dispatch exec quickshell -c hyprmap   # start it now (exec-once only runs on login)
+```
+
+> `hyprctl reload` makes the keybinding take effect right away, but
+> `exec-once` only runs when you log in — the extra `hyprctl dispatch exec`
+> line starts it immediately. On your next login it autostarts by itself.
+>
 > You can also copy the ready-made snippet
 > [`standalone/hyprmap.hyprland.conf`](standalone/hyprmap.hyprland.conf) and
 > `source` it from your main config.
 
-### Option B — Omarchy plugin (Arch)
+### Option B — Omarchy plugin (Arch + Omarchy shell)
 
 ```bash
 git clone https://github.com/Ricardo-Castro-Gastelum/HyprMap.git
@@ -175,7 +211,9 @@ automatically and exposes the same tuning constants.
 ## Tested on
 
 - Arch Linux · Hyprland 0.56.2 · Quickshell 0.3.1 (Omarchy plugin + standalone)
-- Standalone build is API-stable for Quickshell ≥ 0.3 with Hyprland ≥ 0.40.
+- Standalone build is tested on Quickshell 0.3 and should work on 0.2+ with
+  Hyprland ≥ 0.40 (for Fedora, prefer the
+  `errornointernet/quickshell` COPR to get the latest release).
 
 ---
 

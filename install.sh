@@ -83,7 +83,8 @@ PY
 
     if ! command -v quickshell >/dev/null 2>&1; then
       echo "[HyprMap] ERROR: 'quickshell' not found in PATH."
-      echo "  Fedora: see https://github.com/outfoxxed/quickshell (COPR: codrin/quickshell)"
+      echo "  Fedora: sudo dnf copr enable errornointernet/quickshell && sudo dnf install quickshell"
+      echo "  Arch:   sudo pacman -S quickshell   (or AUR: yay -S quickshell-git)"
       exit 1
     fi
     if ! command -v hyprctl >/dev/null 2>&1; then
