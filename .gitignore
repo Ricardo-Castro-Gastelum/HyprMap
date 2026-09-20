@@ -1,0 +1,12 @@
+# Editor / OS cruft
+*.swp
+*~
+.DS_Store
+
+# HyprMap install backups
+*.hyprmap.bak
+
+# Quickshell / Qt QML caches
+.qmlc
+*.qmlc
+qmlcache

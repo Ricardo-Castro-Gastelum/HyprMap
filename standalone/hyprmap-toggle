@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# HyprMap — toggle the minimap on/off (standalone build).
+# Installed by install.sh into ~/.local/bin/hyprmap-toggle
+set -euo pipefail
+
+quickshell ipc -c hyprmap call hyprmap toggle "$@"

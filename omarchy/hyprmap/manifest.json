@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "hyprmap",
+  "name": "HyprMap",
+  "version": "1.0.0",
+  "description": "Workspace minimap. A floating card in the bottom-right corner with one rectangle per occupied workspace, subdivided by the real geometry of every open window with its app icon. Visual only, click-through.",
+  "kinds": [
+    "panel"
+  ],
+  "entryPoints": {
+    "panel": "Minimap.qml"
+  }
+}
